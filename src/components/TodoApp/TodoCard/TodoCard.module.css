@@ -1,0 +1,13 @@
+.card {
+  padding: 0.5rem 0;
+  display: flex;
+  gap: 1rem;
+}
+
+.id {
+  color: #858585;
+}
+
+.title {
+  font-weight: 500;
+}

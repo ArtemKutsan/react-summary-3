@@ -1,11 +1,12 @@
 // src/components/DogsGallery/index.jsx
+import styles from './TodoApp.module.css';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import styles from './TodoApp.module.css';
+import TodoCard from './TodoCard';
+import { createTodo } from './createTodo';
 
 const BASE_URL = 'https://jsonplaceholder.typicode.com';
 const limit = 5;
-const userId = 1;
 
 function TodoApp() {
   const [todos, setTodos] = useState([]);
@@ -13,9 +14,8 @@ function TodoApp() {
   const [isLoading, setIsLoading] = useState(false);
   const [isSending, setIsSending] = useState(false);
 
-  const addTodo = (title) => {
-    const newTodo = { id: todos.length + 1, title, completed: false, userId };
-    setTodos((prev) => [...prev, newTodo]);
+  const addTodo = (todo) => {
+    setTodos((prev) => [...prev, todo]);
   };
 
   const getTodos = async () => {
@@ -23,7 +23,6 @@ function TodoApp() {
     try {
       const response = await axios.get(`${BASE_URL}/todos?_limit=${limit}`);
       setTodos(response.data);
-      console.log(todos);
     } catch (error) {
       console.log(error);
     } finally {
@@ -34,13 +33,9 @@ function TodoApp() {
   const postTodo = async () => {
     setIsSending(true);
     try {
-      const response = await axios.post(
-        `${BASE_URL}/todos`,
-        { id: todos.length + 1, title: todoTitle, completed: false, userId: 1 },
-        { headers: { 'Content-Type': 'application/json; charset=UTF-8' } },
-      );
-      console.log(response);
-      addTodo(todoTitle.trim());
+      const newTodo = createTodo(todos.length + 1, todoTitle);
+      await axios.post(`${BASE_URL}/todos`, newTodo);
+      addTodo(newTodo);
       setTodoTitle('');
     } catch (error) {
       console.log(error);
@@ -51,10 +46,8 @@ function TodoApp() {
 
   const handleAddTodo = (event) => {
     event.preventDefault();
-
     if (!todoTitle.trim()) return;
-
-    postTodo(todoTitle.trim());
+    postTodo();
   };
 
   useEffect(() => {
@@ -63,18 +56,7 @@ function TodoApp() {
 
   return (
     <div>
-      <ul style={{ listStyle: 'none' }}>
-        {isLoading && <p>Загрузка...</p>}
-
-        {!isLoading &&
-          todos.map((todo) => (
-            <li key={todo.id}>
-              {todo.id}. {todo.title}
-            </li>
-          ))}
-      </ul>
-
-      <form onSubmit={handleAddTodo} style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+      <form onSubmit={handleAddTodo} className={styles.form}>
         <input
           type="text"
           value={todoTitle}
@@ -82,8 +64,14 @@ function TodoApp() {
           placeholder="Введите задачу"
         />
         <button type="submit">Добавить todo</button>
-        {isSending && <span>Добавляется...</span>}
+        {isSending && <span>Задача добавляется...</span>}
       </form>
+
+      <ul className={styles.list}>
+        {isLoading && <p>Загрузка списка задач...</p>}
+
+        {!isLoading && todos.map((todo) => <TodoCard key={todo.id} {...todo} />)}
+      </ul>
     </div>
   );
 }
