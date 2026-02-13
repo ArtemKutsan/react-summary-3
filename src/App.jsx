@@ -2,7 +2,8 @@
 import { useState } from 'react';
 import './App.css';
 // import Paginator from './components/Paginator';
-import DogsGallery from './components/DogsGallery';
+// import DogsGallery from './components/DogsGallery';
+import TodoApp from './components/TodoApp';
 
 function App() {
   return (
@@ -15,10 +16,11 @@ function App() {
             {/* <h2>Задача 1: Пагинация</h2> */}
             {/* <Paginator /> */}
 
-            <h2>Задача 2: Галерея собак</h2>
-            <DogsGallery />
+            {/* <h2>Задача 2: Галерея собак</h2>
+            <DogsGallery /> */}
 
-            {/*  */}
+            <h2>Задача 3: Приложение TodoApp</h2>
+            <TodoApp />
           </div>
         </section>
       </main>
