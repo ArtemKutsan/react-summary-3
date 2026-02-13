@@ -1,11 +1,11 @@
-// src/components/DogGallery/index.jsx
+// src/components/DogsGallery/index.jsx
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import styles from './DogGallery.module.css';
+import styles from './DogsGallery.module.css';
 
 const BASE_URL = 'https://dog.ceo/api/breeds/image';
 
-function DogGallery() {
+function DogsGallery() {
   const [dogs, setDogs] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const urlRandomDog = `${BASE_URL}/random`;
@@ -52,4 +52,4 @@ function DogGallery() {
   );
 }
 
-export default DogGallery;
+export default DogsGallery;

@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import './App.css';
 // import Paginator from './components/Paginator';
-import DogGallery from './components/DogGallery';
+import DogsGallery from './components/DogsGallery';
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
             {/* <Paginator /> */}
 
             <h2>Задача 2: Галерея собак</h2>
-            <DogGallery />
+            <DogsGallery />
           </div>
         </section>
       </main>
