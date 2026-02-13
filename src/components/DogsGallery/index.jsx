@@ -41,15 +41,16 @@ function DogsGallery() {
 
   return (
     <div>
-      <div className={styles.dogs}>
-        {isLoading && <p>Loading...</p>}
-
-        {!isLoading &&
-          dogs.map((dogImageSrc) => <img key={Math.random()} src={dogImageSrc} alt="" />)}
-      </div>
+      <p>Загружено собак: {dogs.length}</p>
       <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
         <button onClick={addDog}>Добавить собаку</button>
         <button onClick={() => fetchDogs(dogs.length)}>Обновить всех собак</button>
+      </div>
+      <div className={styles.dogs}>
+        {isLoading && <p>Загрузка...</p>}
+
+        {!isLoading &&
+          dogs.map((dogImageSrc) => <img key={Math.random()} src={dogImageSrc} alt="" />)}
       </div>
     </div>
   );

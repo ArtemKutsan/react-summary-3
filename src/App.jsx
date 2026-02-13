@@ -17,6 +17,8 @@ function App() {
 
             <h2>Задача 2: Галерея собак</h2>
             <DogsGallery />
+
+            {/*  */}
           </div>
         </section>
       </main>
