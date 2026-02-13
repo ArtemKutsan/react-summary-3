@@ -1,8 +1,7 @@
 // src/App.jsx
 import { useState } from 'react';
 import './App.css';
-// import UserProfile from './components/UserProfile';
-import Paginator from './components/Paginator';
+// import Paginator from './components/Paginator';
 import DogGallery from './components/DogGallery';
 
 function App() {
@@ -16,7 +15,7 @@ function App() {
             {/* <h2>Задача 1: Пагинация</h2> */}
             {/* <Paginator /> */}
 
-            {/* <h2>Задача 2: Галерея собак</h2> */}
+            <h2>Задача 2: Галерея собак</h2>
             <DogGallery />
           </div>
         </section>
