@@ -67,11 +67,14 @@ function TodoApp() {
         {isSending && <span>Задача добавляется...</span>}
       </form>
 
-      <ul className={styles.list}>
-        {isLoading && <p>Загрузка списка задач...</p>}
-
-        {!isLoading && todos.map((todo) => <TodoCard key={todo.id} {...todo} />)}
-      </ul>
+      {isLoading && <p>Загрузка списка задач...</p>}
+      {!isLoading && (
+        <ul className={styles.list}>
+          {todos.map((todo) => (
+            <TodoCard key={todo.id} {...todo} />
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
