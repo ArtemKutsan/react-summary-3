@@ -22,9 +22,9 @@ function DogsGallery() {
       for (let i = 0; i < quantity; i++) {
         requests.push(fetchDog());
       }
-      const images = await Promise.all(requests);
-      console.log(images);
-      setDogs(images);
+      const dogsImages = await Promise.all(requests);
+      console.log(dogsImages);
+      setDogs(dogsImages);
     } finally {
       setIsLoading(false);
     }
@@ -35,19 +35,22 @@ function DogsGallery() {
   }, []);
 
   const addDog = async () => {
-    const newDog = await fetchDog();
-    setDogs((prev) => [...prev, newDog]);
+    const newDogImage = await fetchDog();
+    setDogs((prev) => [...prev, newDogImage]);
   };
 
   return (
     <div>
-      {isLoading && <p>Loading...</p>}
+      <div className={styles.dogs}>
+        {isLoading && <p>Loading...</p>}
 
-      {!isLoading &&
-        dogs.map((dogImageSrc) => <img key={Math.random()} src={dogImageSrc} alt="" />)}
-
-      <button onClick={addDog}>Добавить собаку</button>
-      <button onClick={() => fetchDogs(dogs.length)}>Обновить всех собак</button>
+        {!isLoading &&
+          dogs.map((dogImageSrc) => <img key={Math.random()} src={dogImageSrc} alt="" />)}
+      </div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+        <button onClick={addDog}>Добавить собаку</button>
+        <button onClick={() => fetchDogs(dogs.length)}>Обновить всех собак</button>
+      </div>
     </div>
   );
 }
